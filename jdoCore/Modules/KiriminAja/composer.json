@@ -1,0 +1,6 @@
+{
+    "name": "nwidart/kiriminaja",
+    "description": "KiriminAja Mitra API module for JadiOrder",
+    "type": "laravel-module",
+    "require": {}
+}

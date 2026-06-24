@@ -1,0 +1,11 @@
+{
+    "name": "IpaymuPayment",
+    "alias": "ipaymupayment",
+    "version": "1.0.0",
+    "description": "iPaymu Payment Gateway — Direct Payment API (VA, QRIS, E-Wallet, Retail)",
+    "priority": 0,
+    "providers": [
+        "Modules\\IpaymuPayment\\app\\Providers\\IpaymuPaymentServiceProvider"
+    ],
+    "files": []
+}

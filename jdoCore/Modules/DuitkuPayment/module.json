@@ -1,0 +1,11 @@
+{
+    "name": "DuitkuPayment",
+    "alias": "duitkupayment",
+    "version": "1.0.0",
+    "description": "Duitku Payment Gateway — Pop API (VA, E-Wallet, QRIS, Retail, Credit Card)",
+    "priority": 0,
+    "providers": [
+        "Modules\\DuitkuPayment\\app\\Providers\\DuitkuPaymentServiceProvider"
+    ],
+    "files": []
+}

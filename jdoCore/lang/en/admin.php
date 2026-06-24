@@ -1,0 +1,63 @@
+<?php
+
+return [
+    'dashboard' => 'Dashboard',
+    'menu' => [
+        'products' => 'Products',
+        'categories' => 'Categories',
+        'brands' => 'Brands',
+        'orders' => 'Orders',
+        'vouchers' => 'Vouchers',
+        'flash_sale' => 'Flash Sale',
+        'affiliate' => 'Affiliate',
+        'courier' => 'Courier',
+        'reports' => 'Reports',
+        'themes' => 'Themes',
+        'modules' => 'Modules',
+        'payment_plugins' => 'Payment Plugins',
+        'whatsapp_plugins' => 'WhatsApp Plugins',
+        'banners' => 'Banners',
+        'blog' => 'Blog',
+        'pages' => 'Pages',
+        'users' => 'Users',
+        'settings' => 'Settings',
+    ],
+
+    'stats' => [
+        'total_revenue' => 'Total Revenue',
+        'total_orders' => 'Total Orders',
+        'total_products' => 'Total Products',
+        'total_customers' => 'Total Customers',
+        'pending_orders' => 'Pending Orders',
+        'low_stock' => 'Low Stock',
+        'today_revenue' => 'Today\'s Revenue',
+        'today_orders' => 'Today\'s Orders',
+        'best_sellers' => 'Best Sellers',
+        'recent_orders' => 'Recent Orders',
+    ],
+
+    'settings_group' => [
+        'general' => 'General',
+        'store' => 'Store',
+        'payment' => 'Payment',
+        'shipping' => 'Shipping',
+        'notification' => 'Notification',
+    ],
+
+    'settings_label' => [
+        'store_name' => 'Store Name',
+        'store_logo' => 'Store Logo',
+        'store_phone' => 'Store WhatsApp Number',
+        'store_email' => 'Store Email',
+        'store_address' => 'Store Address',
+        'store_description' => 'Store Description',
+        'primary_color' => 'Primary Color',
+        'secondary_color' => 'Secondary Color',
+        'currency_symbol' => 'Currency Symbol',
+        'locale' => 'Language',
+        'order_expiry_hours' => 'Payment Deadline (Hours)',
+        'min_stock_alert' => 'Minimum Stock Alert',
+        'login_method' => 'Login Method',
+        'guest_checkout' => 'Allow Guest Checkout',
+    ],
+];

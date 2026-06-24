@@ -1,0 +1,6 @@
+{
+    "name": "nwidart/rajaongkir",
+    "description": "RajaOngkir API v2 module for JadiOrder",
+    "type": "laravel-module",
+    "require": {}
+}

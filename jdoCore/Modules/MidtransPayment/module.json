@@ -1,0 +1,11 @@
+{
+    "name": "MidtransPayment",
+    "alias": "midtranspayment",
+    "version": "1.0.0",
+    "description": "Midtrans Payment Gateway — Snap API (VA, GoPay, QRIS, Credit Card, dll)",
+    "priority": 0,
+    "providers": [
+        "Modules\\MidtransPayment\\app\\Providers\\MidtransPaymentServiceProvider"
+    ],
+    "files": []
+}

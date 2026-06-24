@@ -1,0 +1,11 @@
+{
+    "name": "KiriminAja",
+    "alias": "kiriminaja",
+    "version": "1.0.0",
+    "description": "Integrasi KiriminAja Mitra API — cek ongkir, request pickup, tracking, dan COD untuk JNE, JNT, SiCepat, AnterAja, dll.",
+    "priority": 0,
+    "providers": [
+        "Modules\\KiriminAja\\app\\Providers\\KiriminAjaServiceProvider"
+    ],
+    "files": []
+}

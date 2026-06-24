@@ -1,0 +1,63 @@
+<?php
+
+return [
+    'dashboard' => 'Dashboard',
+    'menu' => [
+        'products' => 'Produk',
+        'categories' => 'Kategori',
+        'brands' => 'Merek',
+        'orders' => 'Pesanan',
+        'vouchers' => 'Voucher',
+        'flash_sale' => 'Flash Sale',
+        'affiliate' => 'Afiliasi',
+        'courier' => 'Kurir',
+        'reports' => 'Laporan',
+        'themes' => 'Tema',
+        'modules' => 'Modul',
+        'payment_plugins' => 'Plugin Pembayaran',
+        'whatsapp_plugins' => 'Plugin WhatsApp',
+        'banners' => 'Banner',
+        'blog' => 'Blog',
+        'pages' => 'Halaman',
+        'users' => 'Pengguna',
+        'settings' => 'Pengaturan',
+    ],
+
+    'stats' => [
+        'total_revenue' => 'Total Pendapatan',
+        'total_orders' => 'Total Pesanan',
+        'total_products' => 'Total Produk',
+        'total_customers' => 'Total Pelanggan',
+        'pending_orders' => 'Pesanan Menunggu',
+        'low_stock' => 'Stok Menipis',
+        'today_revenue' => 'Pendapatan Hari Ini',
+        'today_orders' => 'Pesanan Hari Ini',
+        'best_sellers' => 'Produk Terlaris',
+        'recent_orders' => 'Pesanan Terbaru',
+    ],
+
+    'settings_group' => [
+        'general' => 'Umum',
+        'store' => 'Toko',
+        'payment' => 'Pembayaran',
+        'shipping' => 'Pengiriman',
+        'notification' => 'Notifikasi',
+    ],
+
+    'settings_label' => [
+        'store_name' => 'Nama Toko',
+        'store_logo' => 'Logo Toko',
+        'store_phone' => 'Nomor WhatsApp Toko',
+        'store_email' => 'Email Toko',
+        'store_address' => 'Alamat Toko',
+        'store_description' => 'Deskripsi Toko',
+        'primary_color' => 'Warna Utama',
+        'secondary_color' => 'Warna Sekunder',
+        'currency_symbol' => 'Simbol Mata Uang',
+        'locale' => 'Bahasa',
+        'order_expiry_hours' => 'Batas Waktu Pembayaran (Jam)',
+        'min_stock_alert' => 'Minimum Stok Notifikasi',
+        'login_method' => 'Metode Login',
+        'guest_checkout' => 'Izinkan Guest Checkout',
+    ],
+];

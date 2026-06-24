@@ -1,0 +1,11 @@
+{
+    "name": "XenditPayment",
+    "alias": "xenditpayment",
+    "version": "1.0.0",
+    "description": "Xendit Payment Gateway — Invoice-based payments (VA, E-Wallet, QRIS, etc.)",
+    "priority": 0,
+    "providers": [
+        "Modules\\XenditPayment\\app\\Providers\\XenditPaymentServiceProvider"
+    ],
+    "files": []
+}

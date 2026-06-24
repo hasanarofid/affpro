@@ -1,0 +1,11 @@
+{
+    "name": "RajaOngkir",
+    "alias": "rajaongkir",
+    "version": "1.0.0",
+    "description": "Integrasi RajaOngkir API v2 — cek ongkir, provinsi, kota",
+    "priority": 0,
+    "providers": [
+        "Modules\\RajaOngkir\\app\\Providers\\RajaOngkirServiceProvider"
+    ],
+    "files": []
+}

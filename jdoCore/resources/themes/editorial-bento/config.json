@@ -1,0 +1,11 @@
+{
+  "name": "Editorial Bento",
+  "version": "1.0.0",
+  "description": "Tema premium editorial + bento layout yang unik, brand-first, responsif desktop & mobile.",
+  "author": "JadiOrder",
+  "thumbnail": "thumbnail.png",
+  "colors": {
+    "primary": "#4F46E5",
+    "secondary": "#7C3AED"
+  }
+}

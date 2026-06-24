@@ -1,0 +1,1 @@
+<?php echo view()->file(resource_path('themes/default/checkout.blade.php'))->render(); ?>

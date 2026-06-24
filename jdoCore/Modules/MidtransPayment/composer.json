@@ -1,0 +1,6 @@
+{
+    "name": "nwidart/midtranspayment",
+    "description": "Midtrans Payment Gateway module for JadiOrder",
+    "type": "laravel-module",
+    "require": {}
+}

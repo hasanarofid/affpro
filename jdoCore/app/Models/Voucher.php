@@ -61,9 +61,6 @@ class Voucher extends Model
      */
     public function calculateDiscount(float $amount): float
     {
-        if ($amount < $this->min_purchase) {
-            return 0;
-        }
 
         if ($this->type === 'fixed') {
             return min($this->value, $amount);

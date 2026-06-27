@@ -166,7 +166,7 @@
                                                                     </span>
                                                                     <div class="form-check p-0 m-0" style="min-height: 0;">
                                                                         <input class="form-check-input ms-0 mt-0 shadow-none" type="radio" 
-                                                                               :value="index" x-model.number="selectedCourierIndex" @click.stop="" style="width: 0.9rem; height: 0.9rem;">
+                                                                               :value="index" x-model.number="selectedCourierIndex" @click.stop="selectShippingOption(index)" style="width: 0.9rem; height: 0.9rem;">
                                                                     </div>
                                                                 </div>
                                                             </div>

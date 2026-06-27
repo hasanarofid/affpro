@@ -57,9 +57,12 @@
 </head>
 
 <body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay d-lg-none" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebar">
-        <div class="brand ps-4 pe-3">
+        <div class="brand ps-4 pe-3 position-relative">
             @php
                 $logo = app(\App\Services\SettingService::class)->get('store_logo');
             @endphp
@@ -77,6 +80,9 @@
                     </span>
                 </div>
             @endif
+            <button class="btn btn-sm btn-light d-lg-none position-absolute" onclick="toggleSidebar()" style="right: 15px; top: 50%; transform: translateY(-50%); z-index: 10; padding: 0.25rem 0.5rem;">
+                <i class="bi bi-x-lg"></i>
+            </button>
         </div>
 
         <div class="py-3">
@@ -236,7 +242,7 @@
         <!-- Topbar -->
         <div class="topbar">
             <span class="toggle-btn me-3 d-lg-none"
-                onclick="document.getElementById('sidebar').classList.toggle('show')">
+                onclick="toggleSidebar()">
                 <i class="bi bi-list"></i>
             </span>
             <h6 class="mb-0 fw-semibold text-muted">@yield('page-title', 'Dashboard')</h6>
@@ -467,6 +473,13 @@
     </script>
 
     <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+            const overlay = document.getElementById('sidebarOverlay');
+            if (overlay) overlay.classList.toggle('show');
+        }
+
         // Global CSRF token for AJAX
         window.csrfToken = '{{ csrf_token() }}';
 

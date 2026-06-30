@@ -1,0 +1,13 @@
+# Capacitor & Android Build Files
+android/
+assets/
+capacitor.config.json
+generate_splash.py
+node_modules/
+package-lock.json
+package.json
+www/
+
+# IDE / OS Files
+.vscode/sftp.json
+.DS_Store

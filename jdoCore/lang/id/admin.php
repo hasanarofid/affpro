@@ -26,7 +26,7 @@ return [
     'stats' => [
         'total_revenue' => 'Total Pendapatan',
         'total_orders' => 'Total Pesanan',
-        'total_products' => 'Total Produk',
+        'total_products' => 'Total Stok Produk',
         'total_customers' => 'Total Pelanggan',
         'pending_orders' => 'Pesanan Menunggu',
         'low_stock' => 'Stok Menipis',

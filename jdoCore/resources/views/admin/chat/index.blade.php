@@ -32,6 +32,7 @@
     <script>
         $(document).ready(function () {
             $('#chatTable').DataTable({
+                stateSave: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,

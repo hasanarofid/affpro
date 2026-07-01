@@ -147,6 +147,7 @@
         let table;
         $(document).ready(function () {
             table = $('#categories-table').DataTable({
+                stateSave: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,

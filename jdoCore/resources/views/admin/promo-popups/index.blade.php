@@ -140,6 +140,7 @@ $(function () {
     const storeUrl = "{{ route('admin.promo-popups.store') }}";
 
     const table = $('#popupsTable').DataTable({
+                stateSave: true,
         processing: true,
         serverSide: true,
         responsive: true,

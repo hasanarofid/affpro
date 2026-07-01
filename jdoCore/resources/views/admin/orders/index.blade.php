@@ -45,6 +45,7 @@
     <script>
         $(document).ready(function () {
             let table = $('#ordersTable').DataTable({
+                stateSave: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,

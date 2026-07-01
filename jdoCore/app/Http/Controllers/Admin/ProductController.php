@@ -50,14 +50,15 @@ class ProductController extends Controller
                     return '<div class="fw-bold text-dark">Rp ' . number_format($product->base_price, 0, ',', '.') . '</div>';
                 })
                 ->editColumn('stock', function ($product) {
+                    $stock = $product->effective_stock;
                     if ($product->has_variants) {
-                        return '<span class="badge bg-light text-muted border" style="font-size: 0.7rem;">MULTI</span>';
-                    } elseif ($product->stock <= $product->min_stock_alert && $product->stock > 0) {
-                        return '<span class="badge bg-warning bg-opacity-10 text-warning border border-warning-subtle">' . $product->stock . '</span>';
-                    } elseif ($product->stock === 0) {
-                        return '<span class="badge bg-danger bg-opacity-10 text-danger border border-danger-subtle">HABIS</span>';
+                        return '<span class="badge bg-info bg-opacity-10 text-info border border-info-subtle" title="Total stok dari semua varian">' . $stock . '</span>';
+                    } elseif ($stock <= $product->min_stock_alert && $stock > 0) {
+                        return '<span class="badge bg-warning bg-opacity-10 text-warning border border-warning-subtle">' . $stock . '</span>';
+                    } elseif ($stock === 0) {
+                        return '<span class="badge bg-danger bg-opacity-10 text-danger border border-danger-subtle">Habis</span>';
                     }
-                    return '<span class="fw-semibold text-dark">' . $product->stock . '</span>';
+                    return '<span class="fw-semibold text-dark">' . $stock . '</span>';
                 })
                 ->editColumn('is_active', function ($product) {
                     $status = $product->is_active ? 'Aktif' : 'Draft';

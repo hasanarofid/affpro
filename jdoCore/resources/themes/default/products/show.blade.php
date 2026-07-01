@@ -355,8 +355,21 @@
                     this.updateCurrent();
                 },
                 updateCurrent() {
-                    const label = Object.values(this.selected).join(' / ');
-                    this.currentVariant = this.variants.find(v => v.label === label);
+                    const selectedValues = Object.values(this.selected);
+                    const totalTypes = {{ $product->variantTypes->count() }};
+                    
+                    if (selectedValues.length < totalTypes) {
+                        this.currentVariant = null;
+                        this.variantId = null;
+                        return;
+                    }
+
+                    this.currentVariant = this.variants.find(v => {
+                        if (!v.label) return false;
+                        const variantValues = v.label.split(' / ');
+                        return selectedValues.length === variantValues.length && 
+                               selectedValues.every(val => variantValues.includes(val));
+                    });
                     if (this.currentVariant) {
                         this.variantId = this.currentVariant.id;
                         document.querySelector('input[name="product_id"]').value = {{ $product->id }}; // Fallback just in case

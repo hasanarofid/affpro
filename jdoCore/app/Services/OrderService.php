@@ -66,12 +66,17 @@ class OrderService
 
             $shippingCost = $options['shipping_cost'] ?? 0;
             $voucherDiscount = $options['discount_amount'] ?? 0;
+            $shippingVoucherId = $options['shipping_voucher_id'] ?? null;
+            $shippingDiscount = $options['shipping_discount_amount'] ?? 0;
+            
+            // Cap shipping discount to not exceed shipping cost
+            $shippingDiscount = min($shippingDiscount, $shippingCost);
 
-            // Total discount = product discount (price coret) + voucher discount
+            // Total discount = product discount (price coret) + voucher discount (product)
             $totalDiscount = $productDiscount + $voucherDiscount;
 
             $subtotal = $rawSubtotal;
-            $total = $subtotal - $totalDiscount + $shippingCost;
+            $total = $subtotal - $totalDiscount + max(0, $shippingCost - $shippingDiscount);
 
             $expiryHours = $settingService->get('order_expiry_hours', 24);
 
@@ -88,10 +93,12 @@ class OrderService
                 'subtotal' => $subtotal,
                 'discount_amount' => $totalDiscount,
                 'shipping_cost' => $shippingCost,
+                'shipping_discount_amount' => $shippingDiscount,
                 'total' => $total,
                 'notes' => $options['notes'] ?? null,
                 'shipping_address' => $shippingAddress,
                 'voucher_id' => $options['voucher_id'] ?? null,
+                'shipping_voucher_id' => $shippingVoucherId,
                 'affiliate_code' => $options['affiliate_code'] ?? null,
                 'expires_at' => now()->addHours($expiryHours),
             ]);
@@ -256,6 +263,8 @@ class OrderService
             'notes' => $data['notes'] ?? null,
             'discount_amount' => $data['discount_amount'] ?? 0,
             'voucher_id' => $data['voucher_id'] ?? null,
+            'shipping_discount_amount' => $data['shipping_discount_amount'] ?? 0,
+            'shipping_voucher_id' => $data['shipping_voucher_id'] ?? null,
             'shipping_cost' => $data['shipping_cost'] ?? 0,
             'courier' => $data['courier'] ?? null,
         ]);

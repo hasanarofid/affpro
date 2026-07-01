@@ -124,6 +124,7 @@
         let table;
         $(document).ready(function () {
             table = $('#brands-table').DataTable({
+                stateSave: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,

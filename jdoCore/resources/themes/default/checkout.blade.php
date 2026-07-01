@@ -312,27 +312,59 @@
                     </div>
                     <div class="card mb-3" style="border:none;border-radius:14px">
                         <div class="card-body">
-                            <h6 class="fw-semibold mb-3"><i class="bi bi-ticket-perforated me-2"></i>Kode Voucher</h6>
+                            <h6 class="fw-semibold mb-3"><i class="bi bi-ticket-perforated me-2"></i>Voucher Diskon Produk</h6>
                             <div class="input-group">
-                                <input type="text" x-model="voucherInput" class="form-control"
-                                    placeholder="Masukkan kode voucher" style="text-transform:uppercase"
-                                    @keyup.enter.prevent="applyVoucher()">
-                                <button type="button" class="btn btn-outline-primary" @click="applyVoucher()"
-                                    :disabled="voucherLoading">
-                                    <span x-show="!voucherLoading">Terapkan</span>
-                                    <span x-show="voucherLoading"><span
+                                <input type="text" x-model="productVoucherInput" class="form-control"
+                                    placeholder="Masukkan kode voucher produk" style="text-transform:uppercase"
+                                    @keyup.enter.prevent="applyProductVoucher()">
+                                <input type="hidden" name="product_voucher_code" :value="productVoucher.valid ? productVoucher.code : ''">
+                                <button type="button" class="btn btn-outline-primary" @click="applyProductVoucher()"
+                                    :disabled="productVoucherLoading">
+                                    <span x-show="!productVoucherLoading">Terapkan</span>
+                                    <span x-show="productVoucherLoading"><span
                                             class="spinner-border spinner-border-sm"></span></span>
                                 </button>
                             </div>
-                            <div x-show="voucher.message" class="mt-2 small"
-                                :class="voucher.valid ? 'text-success' : 'text-danger'" x-text="voucher.message" x-cloak>
+                            <div x-show="productVoucher.message" class="mt-2 small"
+                                :class="productVoucher.valid ? 'text-success' : 'text-danger'" x-text="productVoucher.message" x-cloak>
                             </div>
-                            <template x-if="voucher.valid">
+                            <template x-if="productVoucher.valid">
                                 <div class="d-flex justify-content-between align-items-center bg-light rounded mt-2 px-3 py-2"
                                     style="border-radius:8px!important">
                                     <span class="small"><i class="bi bi-check-circle-fill text-success me-1"></i> <strong
-                                            x-text="voucher.code"></strong></span>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" @click="removeVoucher()">
+                                            x-text="productVoucher.code"></strong></span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" @click="removeProductVoucher()">
+                                        <i class="bi bi-x"></i>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" style="border:none;border-radius:14px">
+                        <div class="card-body">
+                            <h6 class="fw-semibold mb-3"><i class="bi bi-truck me-2"></i>Voucher Diskon Ongkir</h6>
+                            <div class="input-group">
+                                <input type="text" x-model="shippingVoucherInput" class="form-control"
+                                    placeholder="Masukkan kode voucher ongkir" style="text-transform:uppercase"
+                                    @keyup.enter.prevent="applyShippingVoucher()">
+                                <input type="hidden" name="shipping_voucher_code" :value="shippingVoucher.valid ? shippingVoucher.code : ''">
+                                <button type="button" class="btn btn-outline-primary" @click="applyShippingVoucher()"
+                                    :disabled="shippingVoucherLoading">
+                                    <span x-show="!shippingVoucherLoading">Terapkan</span>
+                                    <span x-show="shippingVoucherLoading"><span
+                                            class="spinner-border spinner-border-sm"></span></span>
+                                </button>
+                            </div>
+                            <div x-show="shippingVoucher.message" class="mt-2 small"
+                                :class="shippingVoucher.valid ? 'text-success' : 'text-danger'" x-text="shippingVoucher.message" x-cloak>
+                            </div>
+                            <template x-if="shippingVoucher.valid">
+                                <div class="d-flex justify-content-between align-items-center bg-light rounded mt-2 px-3 py-2"
+                                    style="border-radius:8px!important">
+                                    <span class="small"><i class="bi bi-check-circle-fill text-success me-1"></i> <strong
+                                            x-text="shippingVoucher.code"></strong></span>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" @click="removeShippingVoucher()">
                                         <i class="bi bi-x"></i>
                                     </button>
                                 </div>
@@ -393,16 +425,16 @@
                             </div>
 
                             <!-- Discount row from Voucher -->
-                            <template x-if="voucher.valid && voucher.type !== 'shipping'">
+                            <template x-if="productVoucher.valid">
                                 <div class="d-flex justify-content-between mb-1 text-success">
-                                    <span>Potongan Voucher (<span x-text="voucher.code"></span>)</span>
-                                    <span>-Rp <span x-text="formatNumber(voucher.discount)"></span></span>
+                                    <span>Potongan Produk (<span x-text="productVoucher.code"></span>)</span>
+                                    <span>-Rp <span x-text="formatNumber(productVoucher.discount)"></span></span>
                                 </div>
                             </template>
-                            <template x-if="voucher.valid && voucher.type === 'shipping'">
+                            <template x-if="shippingVoucher.valid">
                                 <div class="d-flex justify-content-between mb-1 text-success">
-                                    <span>Potongan Ongkir (<span x-text="voucher.code"></span>)</span>
-                                    <span>-Rp <span x-text="formatNumber(Math.min(voucher.discount, shippingCost))"></span></span>
+                                    <span>Potongan Ongkir (<span x-text="shippingVoucher.code"></span>)</span>
+                                    <span>-Rp <span x-text="formatNumber(Math.min(shippingVoucher.discount, shippingCost))"></span></span>
                                 </div>
                             </template>
 
@@ -588,16 +620,21 @@
                     this.fetchShippingCosts();
                 },
                 
-                voucherInput: '',
+                productVoucherInput: '',
+                productVoucherLoading: false,
+                productVoucher: { valid: false, code: '', discount: 0, message: '', type: 'product' },
+                
+                shippingVoucherInput: '',
+                shippingVoucherLoading: false,
+                shippingVoucher: { valid: false, code: '', discount: 0, message: '', type: 'shipping' },
+                
                 savingAddress: false,
-                voucherLoading: false,
-                voucher: { valid: false, code: '', discount: 0, message: '', type: 'product' },
                 
                 get finalTotal() {
-                    const productDiscount = this.voucher.valid && this.voucher.type !== 'shipping' ? this.voucher.discount : 0;
-                    const shippingDiscount = this.voucher.valid && this.voucher.type === 'shipping' ? this.voucher.discount : 0;
-                    const effectiveShipping = Math.max(0, this.shippingCost - shippingDiscount);
-                    return Math.max(0, this.subtotal - productDiscount + effectiveShipping);
+                    const pDiscount = this.productVoucher.valid ? this.productVoucher.discount : 0;
+                    const sDiscount = this.shippingVoucher.valid ? this.shippingVoucher.discount : 0;
+                    const effectiveShipping = Math.max(0, this.shippingCost - sDiscount);
+                    return Math.max(0, this.subtotal - pDiscount + effectiveShipping);
                 },
                 get canSubmit() {
                     if (this.paymentMethod === 'wallet') {
@@ -659,8 +696,8 @@
                     this.shippingCost = this.shippingOptions[index].cost;
 
                     // If a shipping voucher is already applied, re-validate against new cost.
-                    if (this.voucher.valid && this.voucher.type === 'shipping') {
-                        this.applyVoucher(true);
+                    if (this.shippingVoucher.valid) {
+                        this.applyShippingVoucher(true);
                     }
                 },
 
@@ -711,10 +748,10 @@
                     this.fetchingShipping = false;
                 },
 
-                async applyVoucher(silent = false) {
-                    const code = (this.voucher.valid ? this.voucher.code : this.voucherInput).trim();
+                async applyProductVoucher(silent = false) {
+                    const code = (this.productVoucher.valid ? this.productVoucher.code : this.productVoucherInput).trim();
                     if (!code) return;
-                    if (!silent) this.voucherLoading = true;
+                    if (!silent) this.productVoucherLoading = true;
                     try {
                         const res = await fetch('{{ route("checkout.applyVoucher") }}', {
                             method: 'POST',
@@ -723,10 +760,11 @@
                                 code: code,
                                 subtotal: this.subtotal,
                                 shipping_cost: this.shippingCost,
+                                expected_type: 'product',
                             })
                         });
                         const data = await res.json();
-                        this.voucher = {
+                        this.productVoucher = {
                             valid: !!data.valid,
                             code: data.valid ? code.toUpperCase() : '',
                             discount: data.discount || 0,
@@ -734,13 +772,45 @@
                             message: data.message || ''
                         };
                     } catch (e) {
-                        this.voucher = { valid: false, code: '', discount: 0, type: 'product', message: 'Gagal memvalidasi voucher' };
+                        this.productVoucher = { valid: false, code: '', discount: 0, type: 'product', message: 'Gagal memvalidasi voucher' };
                     }
-                    this.voucherLoading = false;
+                    this.productVoucherLoading = false;
                 },
-                removeVoucher() {
-                    this.voucher = { valid: false, code: '', discount: 0, type: 'product', message: '' };
-                    this.voucherInput = '';
+                removeProductVoucher() {
+                    this.productVoucher = { valid: false, code: '', discount: 0, type: 'product', message: '' };
+                    this.productVoucherInput = '';
+                },
+                async applyShippingVoucher(silent = false) {
+                    const code = (this.shippingVoucher.valid ? this.shippingVoucher.code : this.shippingVoucherInput).trim();
+                    if (!code) return;
+                    if (!silent) this.shippingVoucherLoading = true;
+                    try {
+                        const res = await fetch('{{ route("checkout.applyVoucher") }}', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                            body: JSON.stringify({
+                                code: code,
+                                subtotal: this.subtotal,
+                                shipping_cost: this.shippingCost,
+                                expected_type: 'shipping',
+                            })
+                        });
+                        const data = await res.json();
+                        this.shippingVoucher = {
+                            valid: !!data.valid,
+                            code: data.valid ? code.toUpperCase() : '',
+                            discount: data.discount || 0,
+                            type: data.discount_type || 'shipping',
+                            message: data.message || ''
+                        };
+                    } catch (e) {
+                        this.shippingVoucher = { valid: false, code: '', discount: 0, type: 'shipping', message: 'Gagal memvalidasi voucher' };
+                    }
+                    this.shippingVoucherLoading = false;
+                },
+                removeShippingVoucher() {
+                    this.shippingVoucher = { valid: false, code: '', discount: 0, type: 'shipping', message: '' };
+                    this.shippingVoucherInput = '';
                 },
                 submitNewAddress(e) {
                     this.savingAddress = true;

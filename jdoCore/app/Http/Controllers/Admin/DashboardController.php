@@ -20,7 +20,7 @@ class DashboardController extends Controller
 
         $todayOrders = Order::whereDate('created_at', today())->count();
         $pendingOrders = Order::where('status', 'pending')->count();
-        $totalProducts = Product::count();
+        $totalProducts = Product::where('has_variants', false)->sum('stock') + \App\Models\ProductVariant::sum('stock');
         $totalOrders = Order::count();
         $totalCustomers = User::role('customer')->count();
         $totalRevenue = Order::where('payment_status', 'paid')->sum('total');

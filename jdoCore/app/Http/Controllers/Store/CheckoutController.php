@@ -47,6 +47,7 @@ class CheckoutController extends Controller
             'code' => 'required|string|max:50',
             'subtotal' => 'required|numeric|min:0',
             'shipping_cost' => 'nullable|numeric|min:0',
+            'expected_type' => 'nullable|string|in:product,shipping',
         ]);
 
         $result = $voucherService->apply(
@@ -54,6 +55,17 @@ class CheckoutController extends Controller
             (float) $request->subtotal,
             (float) $request->input('shipping_cost', 0),
         );
+
+        if ($result['valid'] && $request->filled('expected_type')) {
+            $expected = $request->input('expected_type');
+            if ($result['discount_type'] !== $expected) {
+                $typeStr = $expected === 'shipping' ? 'Ongkir' : 'Produk';
+                $result = [
+                    'valid' => false,
+                    'message' => "Kode ini bukan Voucher {$typeStr}.",
+                ];
+            }
+        }
 
         return response()->json($result);
     }
@@ -147,18 +159,22 @@ class CheckoutController extends Controller
         $discountAmount = 0;     // potongan produk
         $shippingDiscount = 0;   // potongan ongkir
         $voucherId = null;
+        $shippingVoucherId = null;
 
-        if ($request->filled('voucher_code')) {
-            $voucherResult = $voucherService->apply($request->voucher_code, $cart->total, $shippingCost);
-            if ($voucherResult['valid']) {
+        if ($request->filled('product_voucher_code')) {
+            $voucherResult = $voucherService->apply($request->product_voucher_code, $cart->total, $shippingCost);
+            if ($voucherResult['valid'] && $voucherResult['discount_type'] !== 'shipping') {
                 $voucherId = $voucherResult['voucher']->id;
-                if (($voucherResult['discount_type'] ?? 'product') === 'shipping') {
-                    $shippingDiscount = (float) $voucherResult['discount'];
-                    // Cap so shipping never goes negative.
-                    $shippingCost = max(0, $shippingCost - $shippingDiscount);
-                } else {
-                    $discountAmount = (float) $voucherResult['discount'];
-                }
+                $discountAmount = (float) $voucherResult['discount'];
+                $voucherService->markUsed($voucherResult['voucher']);
+            }
+        }
+
+        if ($request->filled('shipping_voucher_code')) {
+            $voucherResult = $voucherService->apply($request->shipping_voucher_code, $cart->total, $shippingCost);
+            if ($voucherResult['valid'] && $voucherResult['discount_type'] === 'shipping') {
+                $shippingVoucherId = $voucherResult['voucher']->id;
+                $shippingDiscount = (float) $voucherResult['discount'];
                 $voucherService->markUsed($voucherResult['voucher']);
             }
         }
@@ -172,6 +188,8 @@ class CheckoutController extends Controller
             'notes' => $request->input('notes'),
             'discount_amount' => $discountAmount,
             'voucher_id' => $voucherId,
+            'shipping_discount_amount' => $shippingDiscount,
+            'shipping_voucher_id' => $shippingVoucherId,
             'shipping_cost' => $shippingCost,
             'courier' => $courierData,
         ]);

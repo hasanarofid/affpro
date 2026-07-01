@@ -38,6 +38,7 @@
     <script>
         $(document).ready(function () {
             $('#vouchersTable').DataTable({
+                stateSave: true,
                 processing: true,
                 serverSide: true,
                 responsive: true,
